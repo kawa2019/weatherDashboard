@@ -16,6 +16,14 @@ export default [
       parser: typescriptParser,
       ecmaVersion: 'latest',
       sourceType: 'module',
+      globals: {
+        describe: 'readonly',
+        it: 'readonly',
+        test: 'readonly',
+        expect: 'readonly',
+        jest: 'readonly',
+        beforeEach: 'readonly',
+      },
     },
     plugins: {
       '@typescript-eslint': typescriptPlugin,

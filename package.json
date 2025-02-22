@@ -3,12 +3,22 @@
   "version": "1.0.0",
   "main": "index.ts",
   "type": "module",
+  "jest": {
+    "preset": "jest-expo",
+    "transform": {
+      "^.+\\.js$": "babel-jest"
+    },
+    "setupFiles": ["<rootDir>/jest.setup.js"]
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "prepare": "husky install && npx husky-init && echo \"npx lint-staged\" > .husky/pre-commit"
+    "prepare": "husky install && npx husky-init && echo \"npx lint-staged\" > .husky/pre-commit",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^2.1.1",
@@ -23,6 +33,9 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@eslint/js": "^9.20.0",
+    "@testing-library/jest-native": "^5.4.3",
+    "@testing-library/react-native": "^13.0.1",
+    "@types/jest": "^29.5.14",
     "@types/react": "~18.3.12",
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@typescript-eslint/parser": "^8.24.1",
@@ -37,10 +50,12 @@
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "^8.0.0",
     "install": "^0.13.0",
+    "jest-expo": "^52.0.4",
     "lint-staged": "^15.4.3",
     "npm": "^11.1.0",
     "prettier": "^3.5.1",
     "react-native-dotenv": "^3.4.11",
+    "react-test-renderer": "^18.3.1",
     "typescript": "^5.3.3"
   },
   "lint-staged": {

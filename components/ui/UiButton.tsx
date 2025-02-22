@@ -11,6 +11,7 @@ import {
 interface UIButtonProps {
   title?: string;
   onPress: () => void;
+  testID?: string;
   iconName?: keyof typeof MaterialCommunityIcons.glyphMap;
   iconColor?: string;
   iconSize?: number;
@@ -28,9 +29,14 @@ const UIButton: React.FC<UIButtonProps> = ({
   isIconOnly = false,
   style,
   textStyle,
+  testID,
 }) => {
   return (
-    <TouchableOpacity style={[styles.button, style]} onPress={onPress}>
+    <TouchableOpacity
+      style={[styles.button, style]}
+      onPress={onPress}
+      testID={testID}
+    >
       {iconName && (
         <MaterialCommunityIcons
           name={iconName}

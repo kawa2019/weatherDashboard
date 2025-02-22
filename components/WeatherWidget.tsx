@@ -39,6 +39,7 @@ const WeatherWidget: FC<WeatherWidgetProps> = ({
         iconName={isFavorite ? 'heart' : 'heart-outline'}
         iconColor={isFavorite ? 'red' : 'gray'}
         isIconOnly={true}
+        testID={'favorite-icon'}
       />
     </View>
   );
