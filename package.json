@@ -11,7 +11,11 @@
     "prepare": "husky install && npx husky-init && echo \"npx lint-staged\" > .husky/pre-commit"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^2.1.1",
+    "axios": "^1.7.9",
     "expo": "~52.0.37",
+    "expo-linear-gradient": "^14.0.2",
+    "expo-location": "^18.0.7",
     "expo-status-bar": "~2.0.1",
     "react": "18.3.1",
     "react-native": "0.76.7"
@@ -22,14 +26,18 @@
     "@types/react": "~18.3.12",
     "@typescript-eslint/eslint-plugin": "^8.24.1",
     "@typescript-eslint/parser": "^8.24.1",
+    "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "^9.20.1",
     "eslint-config-prettier": "^10.0.1",
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "^5.1.0",
     "husky": "^8.0.0",
+    "install": "^0.13.0",
     "lint-staged": "^15.4.3",
+    "npm": "^11.1.0",
     "prettier": "^3.5.1",
+    "react-native-dotenv": "^3.4.11",
     "typescript": "^5.3.3"
   },
   "lint-staged": {
