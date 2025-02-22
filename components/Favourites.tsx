@@ -1,11 +1,6 @@
-import {
-  FlatList,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
 import React, { FC } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+
 import { Weather } from '../types/api';
 
 interface ForecastProps {

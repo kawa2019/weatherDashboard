@@ -1,17 +1,17 @@
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 import React from 'react';
 import {
-  TouchableOpacity,
-  Text,
   StyleSheet,
-  ViewStyle,
+  Text,
   TextStyle,
+  TouchableOpacity,
+  ViewStyle,
 } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 interface UIButtonProps {
   title?: string;
   onPress: () => void;
-  iconName?: string;
+  iconName?: keyof typeof MaterialCommunityIcons.glyphMap;
   iconColor?: string;
   iconSize?: number;
   isIconOnly?: boolean;

@@ -1,3 +1,7 @@
+import { API_KEY } from '@env';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import axios from 'axios';
+import * as Location from 'expo-location';
 import React, { useEffect, useState } from 'react';
 import {
   ActivityIndicator,
@@ -9,19 +13,17 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import * as Location from 'expo-location';
-import axios from 'axios';
-import { API_KEY } from '@env';
-import { GEO_API_URL } from './constants/api';
-import { CitySuggestions, ForecastT, Weather } from './types/api';
-import WeatherBackground from '@/components/WeatherBackground';
-import Search from '@/components/Search';
-import WeatherWidget from '@/components/WeatherWidget';
+
+import Favourites from '@/components/Favourites';
 import Forecast from '@/components/Forecast';
 import RetryErrorMessage from '@/components/RetryErrorMessage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import Search from '@/components/Search';
+import WeatherBackground from '@/components/WeatherBackground';
+import WeatherWidget from '@/components/WeatherWidget';
+
+import { GEO_API_URL } from './constants/api';
+import { CitySuggestions, ForecastT, Weather } from './types/api';
 import { FavoriteCity } from './types/favorites';
-import Favourites from '@/components/Favourites';
 
 const { width } = Dimensions.get('window');
 
@@ -33,8 +35,9 @@ const App = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<boolean | null>(null);
   const [favoriteCities, setFavoriteCities] = useState<FavoriteCity[]>([]);
-  const [weatherDataFavorities, setWeatherDataFavorities] =
-    useState<Weather[]>(null);
+  const [weatherDataFavorities, setWeatherDataFavorities] = useState<Weather[]>(
+    [],
+  );
 
   const loadInitialWeatherData = async () => {
     setLoading(true);
@@ -60,10 +63,10 @@ const App = () => {
           'Allow location access to use this feature',
         );
         setLoading(false);
-
-        return;
+      } else {
+        await loadInitialWeatherData();
       }
-      await loadInitialWeatherData();
+
       await loadFavoriteCities();
     })();
   }, []);
@@ -73,8 +76,6 @@ const App = () => {
     fetchCitySuggestions(text);
   };
 
-  //notes
-  //
   const fetchWeather = async (lat: number, lon: number, isMultiple = false) => {
     const response = await axios.get(
       `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`,
@@ -106,7 +107,7 @@ const App = () => {
         `${GEO_API_URL}?q=${query}&limit=5&appid=${API_KEY}`,
       );
       setSuggestions(response.data);
-    } catch (error) {
+    } catch {
       Alert.alert(
         'Error',
         'Unable to fetch city suggestions. Please try again later.',
@@ -121,7 +122,7 @@ const App = () => {
     try {
       await fetchWeather(city.lat, city.lon);
       await fetchForecast(city.lat, city.lon);
-    } catch (error) {
+    } catch {
       Alert.alert(
         'Error',
         'Unable to fetch weather data. Please try again later.',
@@ -137,9 +138,8 @@ const App = () => {
         : [];
       setFavoriteCities(parsedFavorites);
       fetchWeatherForFavorites(parsedFavorites);
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'Failed to load favorite cities.');
-      setLoading(false);
     }
   };
 
@@ -152,7 +152,7 @@ const App = () => {
       );
 
       setWeatherDataFavorities(weatherResults);
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'Failed to fetch weather data of favorite cities.');
     }
   };
@@ -195,7 +195,7 @@ const App = () => {
         (city) => city.id !== cityId,
       );
       setWeatherDataFavorities(updatedWeatherData);
-    } catch (error) {
+    } catch {
       Alert.alert('Error', 'Failed to remove city from favorites.');
     }
   };

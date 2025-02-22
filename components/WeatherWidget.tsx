@@ -1,10 +1,12 @@
-import { Dimensions, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { weatherIcons } from '@/constants/weatherIcons';
 import React, { FC } from 'react';
+import { Dimensions, StyleSheet, Text, View } from 'react-native';
+
+import UIButton from '@/components/ui/UiButton';
+import { weatherIcons } from '@/constants/weatherIcons';
+
 import { Weather } from '../types/api';
 import { FavoriteCity } from '../types/favorites';
-import UIButton from '@/components/ui/UiButton';
 
 interface WeatherWidgetProps {
   weatherData: Weather;

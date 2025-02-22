@@ -1,3 +1,4 @@
+import React, { FC } from 'react';
 import {
   Dimensions,
   FlatList,
@@ -6,7 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
 } from 'react-native';
-import React, { FC } from 'react';
+
 import { CitySuggestion } from '../types/api';
 
 const { width } = Dimensions.get('window');

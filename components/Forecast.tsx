@@ -1,7 +1,9 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { weatherIcons } from '@/constants/weatherIcons';
 import React, { FC } from 'react';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
+
+import { weatherIcons } from '@/constants/weatherIcons';
+
 import { ForecastT } from '../types/api';
 
 interface ForecastProps {
@@ -14,6 +16,7 @@ const Forecast: FC<ForecastProps> = ({ forecastData }) => {
       data={forecastData}
       keyExtractor={(item) => item.dt.toString()}
       horizontal
+      contentContainerStyle={styles.container}
       renderItem={({ item }) => (
         <View style={styles.forecastItem}>
           <Text>{new Date(item.dt_txt).toLocaleDateString()}</Text>
@@ -33,6 +36,10 @@ const Forecast: FC<ForecastProps> = ({ forecastData }) => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    flexGrow: 1,
+  },
   forecastItem: {
     alignItems: 'center',
     backgroundColor: 'rgba(255, 255, 255, 0.3)',

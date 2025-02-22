@@ -2,7 +2,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { FC, ReactNode } from 'react';
 import { StyleSheet } from 'react-native';
 
-const weatherGradients: { [key: string]: string[] } = {
+const weatherGradients: { [key: string]: [string, string] } = {
   Clear: ['#f6d365', '#fda085'],
   Clouds: ['#d7d2cc', '#304352'],
   Rain: ['#4e54c8', '#8f94fb'],
